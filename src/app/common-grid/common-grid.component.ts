@@ -19,12 +19,8 @@ export class CommonGridComponent implements OnInit{
   }
 
 
-datatype:E_datatype = E_datatype.list;
-//  switchVar='A';
-//  changeswitch():void{
-//    this.switchVar='C';
-//  }
-  @Input() list: number | string = 1;
+datatype:E_datatype = E_datatype.grid;
+
   @Input() grid: number | string = 1;
   @Input() columnDefs:any[] = [];
   @Input()  gridData:any[]=[];

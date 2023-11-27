@@ -17,3 +17,9 @@ export const columnDefs2 = [
     {Field:"LicenseNumber",Name:"License Number"}
 
   ]
+  export const columnDefs3 = [
+    {Field:"CountryId",Name:"Country Id"}
+  ]
+  export const columnDefs4 = [
+    {Field:"AgentName",Name:"AgentName"}
+  ]

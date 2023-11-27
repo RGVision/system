@@ -1,16 +1,42 @@
-<div class="row clearfix">
-    <h1>Grid 1</h1>
-    <div class="col-lg-8 col-md-12">
-        <app-common-grid [columnDefs]="columnDefs" [gridData]="gridData"  ></app-common-grid>
-    </div>
-</div>
+<button id="listview" class="btn btn-outline-primary" (click)="changelist()"><i class="fa fa-list"></i></button>
+<button id="gridview" class="btn btn-outline-primary" (click)="changegrid()"><i class="fa fa-table"></i></button>
+
+@switch (datatype) {
+    @case ('grid') {
+        <div class="row clearfix">
+            <h1>Grid 1</h1>
+            <div class="col-lg-8 col-md-12">
+                <app-common-grid [columnDefs]="columnDefs" [gridData]="gridData"  ></app-common-grid>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <h1>Grid 2</h1>
+            <div class="col-lg-8 col-md-12">
+                <app-common-grid [columnDefs]="columnDefs2" [gridData]="gridData" ></app-common-grid>
+            </div>
+        </div>
+    }
+    @case ('list') {
+        <div class="row clearfix">
+            <h1>List 1</h1>
+            <div class="col-lg-8 col-md-12">
+                <app-common-list [columnDefs]="columnDefs3" [gridData]="gridData"></app-common-list>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <h1>List 2</h1>
+            <div class="col-lg-8 col-md-12">
+                <app-common-list [columnDefs]="columnDefs4" [gridData]="gridData" ></app-common-list>
+            </div>
+        </div>
+    }
+    @default {
+        <p>Datatype Not Defined</p>
+    }
+}
+
 <router-outlet></router-outlet>
 
 
 
-<div class="row clearfix">
-    <h1>Grid 2</h1>
-    <div class="col-lg-8 col-md-12">
-        <app-common-grid [columnDefs]="columnDefs2" [gridData]="gridData" ></app-common-grid>
-    </div>
-</div>
+

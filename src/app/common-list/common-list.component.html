@@ -3,50 +3,67 @@
     class="btn btn-primary"
     (click)="toggleFilter()">
     {{buttonName}}</button>
-    <h2>list-view</h2>
-    <table class="table table-hover table-bordered ">
-        <thead>
-          @if (isFilter) {
-            <tr>
-                @for (headers of columnDefs; track $index) {
-                    <th><a (click)="getsorting(headers)">{{headers.Name}}</a>
-                        <span>
-                            <input id="searchbox" type="text" class="grid-search-textbox"(keyup)="getsearchfilter($event)"
-                              [(ngModel)]="GridFilter[headers?.Field]"  [ngModelOptions]="{standalone: true}">
-                          </span></th>
-                    
-                }
-                
-              </tr>
-          }@else {
-            <tr >
-                @for (headers of columnDefs; track $index) {
-                    <th><a (click)="getsorting(headers)" [hidden]="isFilter">{{headers.Name}}</a></th>
-                }
-              </tr>
+    <ul>
+        @if (isFilter) {
+          @for (headers of columnDefs; track $index) {
+            <span>
+              <input id="searchbox" type="text" class="grid-search-textbox"(keyup)="getsearchfilter($event)"
+                [(ngModel)]="GridFilter[headers?.Field]"  [ngModelOptions]="{standalone: true}">
+            </span>
+                     @for (row of gridData |  paginate: { itemsPerPage: itemsPerPages, currentPage: page }; track $index) {
+                      @for (col of columnDefs ; track $index) {
+                          <span>
+                              
+                              @if (col.DataType=="Date") {
+                                <li><a (click)="getsorting(headers)">{{headers.Name}}</a>
+                                  
+                                
+                                  {{row[col.Field] | date}}
+                                </li>
+                              }
+                              
+                              @else {
+                                <li><a (click)="getsorting(headers)">{{headers.Name}}</a>
+                                  
+                                
+                              {{row[col.Field]}}
+                                </li>
+                              }
+                          </span>
+                      }
+                      
+                      }
+
           }
-         
-        </thead>
-        <tbody>
-           @for (row of gridData |  paginate: { itemsPerPage: itemsPerPages, currentPage: page }; track $index) {
-            <tr>
-                @for (col of columnDefs ; track $index) {
-                    <td>
-                        
-                        @if (col.DataType=="Date") {
-                            {{row[col.Field] | date}}
-                        }
-                        
-                        @else {
-                        {{row[col.Field]}}
-                        }
-                    </td>
-                }
-            </tr>
+          
+    }@else {
+
+          @for (headers of columnDefs; track $index) {
+                @for (row of gridData |  paginate: { itemsPerPage: itemsPerPages, currentPage: page }; track $index) {
+                  @for (col of columnDefs ; track $index) {
+                      <span>
+                          
+                          @if (col.DataType=="Date") {
+                            <li><a (click)="getsorting(headers)" [hidden]="isFilter">{{headers.Name}}</a>
+                              {{row[col.Field] | date}}
+                            </li>
+                          }
+                          
+                          @else {
+                            <li><a (click)="getsorting(headers)" [hidden]="isFilter">{{headers.Name}}</a>
+                          {{row[col.Field]}}
+                            </li>
+                          }
+                      </span>
+                  }
+                  
+                  }
+      
             
-           }
-        </tbody>
-      </table>
+          }
+
+    }
+    </ul>
       <div>
         <pagination-controls (pageChange)="pagechange($event)"></pagination-controls>
         <label id="page-selection">Items per page:

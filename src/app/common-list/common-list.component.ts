@@ -24,7 +24,7 @@ datatype:E_datatype = E_datatype.list;
 //  changeswitch():void{
 //    this.switchVar='C';
 //  }
-  @Input() list: number | string = 1;
+  @Input() list: any;
   @Input() columnDefs:any[] = [];
   @Input()  gridData:any[]=[];
   tempGridData:any[]=[];
